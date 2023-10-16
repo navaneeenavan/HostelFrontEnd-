@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BlockA, BlockB, BlockC, BlockD } from "../Constant/Blocks";
 
-function HeroComponent({ Student }) {
+function AdminHeroComponent({ Student }) {
   const blockA = BlockA();
   const blockB = BlockB();
   const blockC = BlockC();
@@ -16,7 +16,7 @@ function HeroComponent({ Student }) {
   return (
     <div className="w-full max-w-screen-md mx-auto bg-white mt-5 p-4">
       <h1 className="text-3xl font-mono font-extrabold mb-6">
-        Hello {Student.Name}
+        Hello Mr.Senbagaraj
       </h1>
       <div className="flex flex-row gap-5 mt-5">
         <button
@@ -106,4 +106,4 @@ function Room({ id, type, occupants, occupancy }) {
   );
 }
 
-export default HeroComponent;
+export default AdminHeroComponent;

@@ -10,7 +10,6 @@ function Reallocation_Request({Student}) {
         <div className = "flex flex-row min-h-screen bg-zinc-6f00">
             <Navbar/>
             <ReallocationConsent Student={Student}/>
-
         </div>
     )
 }

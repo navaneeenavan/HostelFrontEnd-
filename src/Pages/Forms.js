@@ -11,7 +11,6 @@ function Forms({Student}) {
             {/* <AllocationForm Student={Student}/> */}
             <Form Student={Student}/>
             
-            
         </div>
     )
 }

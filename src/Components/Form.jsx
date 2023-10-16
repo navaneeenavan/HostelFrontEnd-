@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Seaters } from "../Constant/General";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import the CSS for Toastify
+import "react-toastify/dist/ReactToastify.css";
 import { Others_Block, FirstYear_Block } from "../Constant/General";
 import { BlockA, BlockB, BlockC, BlockD } from "../Constant/Blocks";
 
@@ -28,7 +28,8 @@ function Form({ Student }) {
         </div>
       ) : (
         <div className="mt-3">
-          Your Allocation is Already done. If you have to change your room, try requesting for reallocation from your side.
+          Your Allocation is Already done. If you have to change your room, try
+          requesting for reallocation from your side.
         </div>
       )}
     </div>
@@ -44,40 +45,44 @@ function AllocationForm({ Student }) {
   const [currentBlock, setCurrentBlock] = useState([]);
   const [unoccupiedRooms, setUnoccupiedRooms] = useState([]);
   const [formData, setFormData] = useState({
-    seater: "4Seater", // Initialize with the default value
+    seater: null, // Initialize with the default value
     yearOfStudy: Student.Year,
     name: Student.Name,
     rollNo: Student.id,
     department: Student.Department,
-    roomPreference: "",
-    blockPreference: "",
+    roomPreference: null,
+    blockPreference: null,
     phoneNumber: Student.Phone,
+    ReallocationReason: Student.ReallocationReason,
   });
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log("FORMDATA", { ...formData, [name]: value });
     setFormData({ ...formData, [name]: value });
   };
 
   const handleBlock = (e) => {
     const selectedBlock = e.target.value;
 
-    if (selectedBlock === 'A') {
+    if (selectedBlock === "A") {
       setCurrentBlock(blockA);
-    } else if (selectedBlock === 'B') {
+    } else if (selectedBlock === "B") {
       setCurrentBlock(blockB);
-    } else if (selectedBlock === 'C') {
+    } else if (selectedBlock === "C") {
       setCurrentBlock(blockC);
-    } else {
+    } else if (selectedBlock === "D") {
       setCurrentBlock(blockD);
     }
+  };
 
+  useEffect(() => {
     const filteredRooms = currentBlock
-      .map((floor) => floor.rooms.filter((room) => !room.occupancy))
+      .map((floor) => floor.rooms.filter((room) => room.occupancy))
       .flat();
 
     setUnoccupiedRooms(filteredRooms);
-  };
+  }, [currentBlock]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,43 +100,50 @@ function AllocationForm({ Student }) {
       roomPreference: formData.roomPreference,
       blockPreference: formData.blockPreference,
       phoneNumber: Student.Phone,
+      ReallocationReason: Student.ReallocationReason,
     };
-    
-    try {
-      const response = await axios.post("http://localhost:4000/Room_change_request", completeFormData, {
+
+    console.log("COMPLETE FORM DATA", completeFormData);
+
+    axios
+      .post("http://localhost:4000/Room_change_request", completeFormData, {
         headers: {
           "Content-Type": "application/json",
         },
-      });
+      })
+      .then((res) => {
+        console.log(res.data);
 
-      console.log(response.data);
-
-      setFormData({
-        seater: "",
-        yearOfStudy: Student.Year,
-        name: Student.Name,
-        rollNo: Student.id,
-        department: Student.Department,
-        roomPreference: "",
-        blockPreference: "",
-        phoneNumber: Student.Phone,
+        setFormData({
+          seater: "",
+          yearOfStudy: Student.Year,
+          name: Student.Name,
+          rollNo: Student.id,
+          department: Student.Department,
+          roomPreference: "",
+          blockPreference: "",
+          phoneNumber: Student.Phone,
+          ReallocationReason: Student.ReallocationReason,
+        });
+      })
+      .catch((error) => {
+        console.error("Error submitting form:", error);
+        toast.error("Error submitting the form.", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error("Error submitting the form.", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-    }
   };
 
   return (
     <div>
       <div className="w-[750px] h-[850px] bg-white mt-5">
         <form onSubmit={handleSubmit}>
-          <h1 className="mt-10 ml-10 font-mono font-extrabold text-5xl">ALLOCATION FORM</h1>
+          <h1 className="mt-10 ml-10 font-mono font-extrabold text-5xl">
+            ALLOCATION FORM
+          </h1>
           <div className="flex flex-col ml-10 mt-10 space-y-7">
-          <div className="flex flex-row ">
+            <div className="flex flex-row ">
               <div className="relative ml-4">
                 <h1>
                   {" "}
@@ -173,7 +185,10 @@ function AllocationForm({ Student }) {
 
             <div className="flex flex-row ml-3">
               <div className="relative ml-4">
-                <label htmlFor="blockPreference" className="block text-lg font-medium">
+                <label
+                  htmlFor="blockPreference"
+                  className="block text-lg font-medium"
+                >
                   <span className="font-bold">Block Preference: </span>
                 </label>
                 <select
@@ -187,6 +202,9 @@ function AllocationForm({ Student }) {
                   }}
                   className="mt-1 p-2 pl-4 border rounded-lg w-24ch"
                 >
+                  <option selected disabled>
+                    Select Block
+                  </option>
                   {formData.yearOfStudy === "1"
                     ? FirstYear_Block.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -201,7 +219,10 @@ function AllocationForm({ Student }) {
                 </select>
               </div>
               <div className="relative">
-                <label htmlFor="roomPreference" className="block text-lg font-medium">
+                <label
+                  htmlFor="roomPreference"
+                  className="block text-lg font-medium"
+                >
                   <span className="font-bold">Room Preference:</span>
                 </label>
                 <select
@@ -212,6 +233,9 @@ function AllocationForm({ Student }) {
                   onChange={handleChange}
                   className="mt-1 p-2 pl-4 pr-8 border rounded-lg w-24ch"
                 >
+                  <option selected disabled>
+                    Select Room
+                  </option>
                   {unoccupiedRooms.map((room) => (
                     <option key={room.id} value={room.id}>
                       {room.id}
@@ -224,19 +248,24 @@ function AllocationForm({ Student }) {
               <label htmlFor="seater" className="block text-lg font-medium">
                 <span className="font-bold">Seater: </span>
               </label>
+
               <select
                 id="seater"
                 name="seater"
                 value={formData.seater}
                 required
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
                 className="mt-1 p-2 pl-4 pr-8 border rounded-lg w-24ch"
               >
-                {Seaters.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
+                {console.log(
+                  formData.roomPreference && formData.roomPreference[1]
+                )}
+                <option selected disabled>
+                  Select seater
+                </option>
+                <option>
+                  {formData.roomPreference && formData.roomPreference[1]}
+                </option>
               </select>
             </div>
 

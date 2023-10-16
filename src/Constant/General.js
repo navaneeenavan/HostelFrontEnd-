@@ -1,18 +1,18 @@
 const Seaters = [
     {
-      value: "1Seater",
+      value: "1",
       label: "1",
     },
     {
-      value: "2Seater",
+      value: "2",
       label: "2",
     },
     {
-      value: "3Seater",
+      value: "3",
       label: "3",
     },
     {
-      value: "4Seater",
+      value: "4",
       label: "4",
     },
     {
@@ -41,10 +41,24 @@ const FirstYear_Block = [
     value: "A",
     label: "A",
   },
-  {
-    value: "B-First floor",
-    label: "B",
-  },
+  
 ]
 
-export {Seaters,Others_Block,FirstYear_Block}
+const Reasons = [
+  {
+    value: "Did not like the Room mate",
+    label: "Did not like the Room mate",
+  },
+  {
+    value: "Did not feel comfortable with the room",
+    label: "Did not feel comfortable with the room",
+  },
+  {
+    value: "Feeling Lonely and Need to change to Friend's room",
+    label: "Feeling Lonely and Need to change to Friend's room",
+  },
+  
+];
+
+
+export {Seaters,Others_Block,FirstYear_Block,Reasons}

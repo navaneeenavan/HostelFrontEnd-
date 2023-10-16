@@ -33,7 +33,7 @@ function Confirmation() {
 
   const handleRoomClick = (roomId) => {
     // Create a new array with updated Status
-    
+
     const updatedRooms = rooms.map((room) => {
       if (room.id === roomId && room.Status === false) {
         return {
@@ -70,8 +70,8 @@ function Confirmation() {
             />
           ))}
         </div>
-        <div className = "font-mono">
-             Currently Selected Room : {SelectedRoom}
+        <div className="font-mono">
+          Currently Selected Room : {SelectedRoom}
         </div>
       </div>
     </div>
@@ -95,4 +95,4 @@ function Room({ room, onClick, SelectedRoom }) {
   );
 }
 
-export default Confirmation
+export default Confirmation;

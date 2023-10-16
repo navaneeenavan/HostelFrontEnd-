@@ -1,10 +1,14 @@
-import Login from "../login.jsx"
-function login() {
+import React, { Component } from 'react';
+import Login from '../login.jsx';
+
+class LoginContainer extends Component {
+  render() {
     return (
-        <div>
-            <Login/>
-        </div>
-    )
+      <div>
+        <Login />
+      </div>
+    );
+  }
 }
 
-export default login
+export default LoginContainer;

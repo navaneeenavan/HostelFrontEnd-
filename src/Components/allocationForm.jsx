@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Seaters = [
@@ -25,8 +25,7 @@ const Seaters = [
   },
 ];
 
-
-function AllocationForm({Student}) {
+function AllocationForm({ Student }) {
   const [formData, setFormData] = useState({
     seater: "",
     yearOfStudy: Student.Year,
@@ -38,7 +37,7 @@ function AllocationForm({Student}) {
     phoneNumber: Student.Phone,
   });
 
-  const handleChange = (e)=> {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -121,9 +120,7 @@ function AllocationForm({Student}) {
                   required
                   onChange={handleChange}
                   className="mt-1 p-2 pl-4 pr-8 border rounded-lg w-24ch"
-                >
-                  
-                </select>
+                ></select>
               </div>
             </div>
 
@@ -165,7 +162,7 @@ function AllocationForm({Student}) {
                   htmlFor="department"
                   className="block text-lg font-medium"
                 >
-                  Department: 
+                  Department:
                 </label>
                 <select
                   id="department"
@@ -174,8 +171,7 @@ function AllocationForm({Student}) {
                   required
                   onChange={handleChange}
                   className="mt-1 p-2 pl-4 pr-8 border rounded-lg w-38ch"
-                >
-                </select>
+                ></select>
               </div>
             </div>
 
@@ -237,13 +233,13 @@ function AllocationForm({Student}) {
 
             <div className="flex min-w-screen  justify-end mt-10 mr-10">
               {/* <Link to="/Confirm"> */}
-                <button
-                  type="submit"
-                  className="border-2 border-[#FF435F] opacity-95 h-10 w-32 rounded-lg font-normal spacing text-md"
-                  style={{ letterSpacing: "2px" }}
-                >
-                  SUBMIT
-                </button>
+              <button
+                type="submit"
+                className="border-2 border-[#FF435F] opacity-95 h-10 w-32 rounded-lg font-normal spacing text-md"
+                style={{ letterSpacing: "2px" }}
+              >
+                SUBMIT
+              </button>
               {/* </Link> */}
             </div>
           </div>

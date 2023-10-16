@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -13,7 +13,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function AlertDialogSlide(props) {
   const [open, setOpen] = useState(false);
-  const [agreeVal, setAgreeVal] = useState(false); // Initialize agreeVal as false
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -24,8 +23,10 @@ export default function AlertDialogSlide(props) {
   };
 
   const handleAgree = () => {
-    setAgreeVal(true); // Set agreeVal to true when "Agree" button is clicked
-    handleClose(); // Close the dialog
+    if (typeof props.onAgree === "function") {
+      props.onAgree(); // Call the provided onAgree function
+    }
+    handleClose();
   };
 
   return (
@@ -43,20 +44,21 @@ export default function AlertDialogSlide(props) {
         <DialogTitle>{props.DialogTitle}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Hey hello This is a Filler Contents   
-            Hey hello This is a Filler Contents 
-            Hey hello This is a Filler Contents 
-            Hey hello This is a Filler Contents 
-            Hey hello This is a Filler Contents 
+            Frequent Room Change is not entertained, Contact your Parents before
+            Changing rooms, only a few number of room changes will be provided,
+            Provide with the accurate reason for leaving the room. If wrong
+            information is given, an inquiry will be held, and actions will be taken. Do you agree with the terms and conditions?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button value = {open} onClick={handleClose}>Disagree</Button>
-          <Button value = {agreeVal} onClick={handleAgree}>Agree</Button> {/* Call handleAgree when "Agree" is clicked */}
+          <Button value={open} onClick={handleClose}>
+            Disagree
+          </Button>
+          <Button value={open} onClick={handleAgree}>
+            Agree
+          </Button>
         </DialogActions>
       </Dialog>
-      {/* Pass agreeVal as a prop directly */}
-      {props.children(agreeVal)}
     </div>
   );
 }

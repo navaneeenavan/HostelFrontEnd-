@@ -61,6 +61,9 @@ const Reallocation_Consent = ({ Student }) => {
       // Send a POST request to update the Allocation
       const formData = {
         id: Student.id,
+        Block:"NONE",
+        Room: "NONE",
+        SeaterType:"NONE",
         allocationStatus: false, // Set to true or false based on your logic
       };
 
@@ -88,6 +91,11 @@ const Reallocation_Consent = ({ Student }) => {
       console.error("Request error:", error);
     }
   };
+
+
+
+
+
 
   return (
     <div className="w-[750px] h-[850px] bg-white mt-5 font-mono">

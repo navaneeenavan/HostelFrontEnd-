@@ -112,7 +112,8 @@ function AllocationForm({ Student }) {
         },
       })
       .then((res) => {
-        console.log(res.data);
+
+        console.log(res.data, "API POST Request Done");
 
         setFormData({
           seater: "",

@@ -8,5 +8,4 @@ function confirmation() {
         </div>
     )
 }
-
 export default confirmation

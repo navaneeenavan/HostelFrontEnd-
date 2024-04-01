@@ -32,7 +32,7 @@ function AdminRequest({ ChangeRequests, setChangeRequests = () => {} }) {
         setChangeRequests((requests) =>
           requests.filter((request) => request.rollNo !== rollNo)
         );
-         window.location.reload();
+        window.location.reload();
       } else {
         // Handle errors, e.g., show an error message
         console.error("Error updating Allocation");
@@ -41,8 +41,6 @@ function AdminRequest({ ChangeRequests, setChangeRequests = () => {} }) {
       console.error("Request error:", error);
     }
   };
-
-  // do not touch the above -------
 
   const handleSetMessage = async (rollNo) => {
     try {
@@ -82,8 +80,6 @@ function AdminRequest({ ChangeRequests, setChangeRequests = () => {} }) {
     }
   };
 
-  // do not touch above
-
   const handleSetMeetMessage = async (rollNo) => {
     try {
       console.log("this snippet is running");
@@ -121,8 +117,6 @@ function AdminRequest({ ChangeRequests, setChangeRequests = () => {} }) {
       console.error("Request error:", error);
     }
   };
-
-  // do not touch anything above
 
   const handleNewRoom = async (rollNo, Block, Room) => {
     try {
@@ -164,8 +158,6 @@ function AdminRequest({ ChangeRequests, setChangeRequests = () => {} }) {
       console.error("Request error:", error);
     }
   };
-
-  // do not touch below -------------
 
   return (
     <div className="flex flex-col w-full max-w-screen-md mx-auto bg-white mt-5 p-4 gap-10 font-mono">

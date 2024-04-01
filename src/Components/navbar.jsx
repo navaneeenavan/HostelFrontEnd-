@@ -9,7 +9,7 @@ function navbar() {
     <div className="flex flex-rows ">
       <div className="w-[251px] min-h-screen bg-white rounded-tl-[30px] rounded-bl-[30px]  mt-5 ml-5 border-r-2 border-gray-400 ">
         <div className="flex flex-col mx-10 ">
-          <h1 className="text-black font-extrabold font-mono text-xl mt-10 pl-2 ">
+          <h1 className="text-black font-extrabold font-mono text-xl mt-10 pl-2">
             Room Allocator
           </h1>
           <div className="flex flex-row mt-16 ml-2 ">

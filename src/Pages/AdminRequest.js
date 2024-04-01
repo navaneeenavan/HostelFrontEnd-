@@ -2,9 +2,6 @@ import React from "react";
 import AdminNavBar from "../Components/adminNavBar.jsx"
 import AdminRequestComp from "../Components/adminRequest.jsx"
 import ChangeRequest from "../Constant/Reallocation.js"
-
-
-
 function AdminRequest() {
 
     const [ChangeData, setChangeRequests] = ChangeRequest(); // Assuming this returns an array of change requests
@@ -15,6 +12,5 @@ function AdminRequest() {
       </div>
     );
   }
-  
 
 export default AdminRequest
